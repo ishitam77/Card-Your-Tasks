@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="container">
+
+    <h2>Search Task</h2>
+
+    <form method="GET">
+
+        <div class="form-group search-form">
+
+          <div class="input-group" style="width:500px;">
+
+            <div class="input-group-append">
+
+                <select class="form-control btn btn-secondary" id="which-task" name="which-task" required>
+
+                    <option value=""> Select Task </option>
+
+                    <option value="office"> Office Task </option>
+        
+                    <option value="household"> Household Task </option>
+        
+                    <option value="sideskills"> SideSkill Task </option>
+    
+                    <option value="workout"> Workout Task </option>
+                    
+                  </select>
+  
+              </div> &nbsp; &nbsp;
+
+            <input type="text" class="form-control" id="taskname" name="taskname" placeholder="Enter task name">
+
+            &nbsp; &nbsp;
+
+            <div class="input-group-append">
+
+              <button type="submit" class="btn btn-success">Search</button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </form>
+
+  </div>
+
+  <div class="container p-3">
+
+    <h4><strong> Search Results </strong> </h4>
+    <hr>
+
+        <div class="row">
+
+            {% if tasks %}
+
+             {% for task in tasks %}
+
+            <div class="col-md-4 mb-3">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{ task.taskname }}</h5>
+
+                        <p class="card-text">
+
+                            {% if task.priority %}
+
+                                <b>Priority:</b> {{ task.priority }}<br>
+
+                            {% endif %}
+
+
+                            {% if task.duedate %}
+
+                                <b>Due Date:</b> {{ task.duedate }}<br>
+
+                            {% endif %}
+
+
+                            {% if task.estimatedtime %}
+
+                                <b>Estimated Time:</b> {{ task.estimatedtime }}<br>
+
+                            {% endif %}
+
+                        
+                            {% if task.room %}
+
+                                <b>Room:</b> {{ task.room }}<br>
+
+                            {% endif %}
+
+
+                            {% if task.equipment %}
+
+                                <b>Equipment:</b> {{ task.equipment }}<br>
+
+                            {% endif %}
+
+
+                            {% if task.assignee %}
+
+                                <b>Assignee:</b> {{ task.assignee }}<br>
+
+                            {% endif %}
+
+
+                            {% if task.skillcategory %}
+
+                                <b>Skill Category:</b> {{ task.skillcategory }}<br>
+
+                            {% endif %}
+
+
+                            {% if task.goal %}
+
+                                <b>Goal:</b> {{ task.goal }}<br>
+
+                            {% endif %}
+
+
+                            {% if task.resources %}
+
+                                <b>Resources:</b> {{ task.resources }}<br>
+
+                            {% endif %}
+
+
+                            {% if task.timeallocation %}
+
+                                <b>Time Allocation:</b> {{ task.timeallocation }}<br>
+
+                            {% endif %}
+
+
+                            {% if task.type %}
+
+                                <b>Type:</b> {{ task.type }}<br>
+
+                            {% endif %}
+
+
+                            {% if task.location %}
+
+                                <b>Location:</b> {{ task.location }}<br>
+                                
+                            {% endif %}
+
+
+                            {% if task.notes %}
+
+                                <b>Notes:</b> {{ task.notes }}<br>
+
+                            {% endif %}
+
+                            {% if task.created %}
+
+                                <b>Created:</b> {{ task.created }}<br>
+
+                            {% endif %}
+
+                            {% if task.completed %}
+
+                            <b>Status:</b> Completed 
+
+                            {% else %} 
+
+                            <b>Status:</b> Not Completed 
+
+                            {% endif %}
+                            <br><br>
+                            
+
+                            <a href="{% url 'update-task' task.id which_task %}" class="btn btn-info"> Update Task &nbsp; <i class="fa fa-plus" aria-hidden="true"></i> </a>
+
+                            &nbsp;
+
+                            <button class="open-button btn btn-danger">Delete &nbsp;<i class="fa fa-minus-square" aria-hidden="true"></i></button>
+                                          
+                            <dialog class="modal" style="text-align: center;">
+
+                                <h2>{{task.taskname}}</h2>
+                                <p><strong>Hey, Do you Really Want to Delete this Task ???</strong></p>
+                                <div style="display: flex; justify-content: center; gap: 10px;">
+
+                                    <a href="{% url 'delete-task' task.id which_task %}" class="btn btn-danger">Yes &nbsp;<i class="fa fa-minus-square" aria-hidden="true"></i></a>
+                                    <button class="close-button btn btn-success">No <i class="fa-solid fa-xmark"></i></button>
+                                    
+                                </div>
+
+                            </dialog>
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+    {% else %}
+
+        <p class="notask">Task does not exist.</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,327 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body>
+
+  <div class="container bg-light shadow-md p-5 from-layout">
+
+    <h3> Update Your Tasks </h3>
+
+    <h6> Update your Tasks down below. </h6>
+
+    <hr>
+    <br>
+
+    {% if task_type == 'office' %}
+
+      <h2> Update Office Task </h2>
+
+      <form method="post">
+
+        {% csrf_token %}
+
+        <div class="form-group mb-3">
+
+          <label for="taskname">Task Name:</label>
+
+          <input type="text" class="form-control" id="taskname" name="taskname" value="{{ task.taskname }}" required>
+
+        </div>
+
+        <div class="form-group mb-3">
+
+          <label for="priority">Priority:</label>
+
+          <select class="form-control" id="priority" name="priority" required>
+
+            <option value="high" {% if task.priority == 'high' %}selected{% endif %}>High</option>
+
+            <option value="medium" {% if task.priority == 'medium' %}selected{% endif %}>Medium</option>
+
+            <option value="low" {% if task.priority == 'low' %}selected{% endif %}>Low</option>
+
+          </select>
+
+        </div>
+
+        <div class="form-group mb-3">
+
+            <label for="duedate">Due Date:</label>
+  
+            <input type="date" class="form-control" id="duedate" name="duedate" value="{{ task.duedate|date:'Y-m-d' }}" required>
+  
+          </div>
+
+          <div class="form-group mb-3">
+
+            <label for="estimatedtime">Estimated Time:</label>
+  
+            <input type="time" class="form-control" id="estimatedtime" name="estimatedtime" value="{{ task.estimatedtime|time:'H:i' }}" required>
+  
+          </div>
+
+          <div class="form-group mb-3">
+
+            <label for="notes">Notes:</label>
+            
+            <textarea class="form-control" id="notes" name="notes" rows="3" required>{{ task.notes }}</textarea>
+  
+          </div>
+
+          <div class="form-group mb-3">
+
+            <label for="completed">Completed:</label>
+
+            <input type="checkbox" id="completed" name="completed" {% if task.completed %}checked{% endif %}>
+
+          </div>
+      
+          <button type="submit" class="btn btn-success">Update Task</button>
+
+          <button type="reset" class="btn btn-danger">Clear</button>
+
+          <a href="{% url 'index' %}" class="btn btn-secondary">Return</a>
+
+      </form>
+
+    {% elif task_type == 'household' %}
+
+      <h2> Update Household Task </h2>
+
+      <form method="post">
+
+        {% csrf_token %}
+    
+        <div class="form-group mb-3">
+
+          <label for="taskname">Task Name:</label>
+
+          <input type="text" class="form-control" id="taskname" name="taskname" value="{{ task.taskname }}" required>
+
+        </div>
+    
+        <div class="form-group mb-3">
+
+          <label for="priority">Priority:</label>
+
+          <select class="form-control" id="priority" name="priority" required>
+
+            <option value="high" {% if task.priority == 'high' %}selected{% endif %}>High</option>
+
+            <option value="medium" {% if task.priority == 'medium' %}selected{% endif %}>Medium</option>
+
+            <option value="low" {% if task.priority == 'low' %}selected{% endif %}>Low</option>
+
+          </select>
+
+        </div>
+    
+        <div class="form-group mb-3">
+
+          <label for="room">Room:</label>
+
+          <input type="text" class="form-control" id="room" name="room" value="{{ task.room }}" required>
+
+        </div>
+    
+        <div class="form-group mb-3">
+
+          <label for="equipment">Equipment Needed:</label>
+
+          <input type="text" class="form-control" id="equipment" name="equipment" value="{{ task.equipment }}" required>
+
+        </div>
+    
+        <div class="form-group mb-3">
+
+          <label for="assignee">Assignee:</label>
+
+          <input type="text" class="form-control" id="assignee" name="assignee" value="{{ task.assignee }}" required>
+
+        </div>
+    
+        <div class="form-group mb-3">
+
+          <label for="notes">Notes:</label>
+
+          <textarea class="form-control" id="notes" name="notes" rows="3" required>{{ task.notes }}</textarea>
+        </div>
+    
+        <div class="form-group mb-3">
+
+          <label for="completed">Completed:</label>
+
+          <input type="checkbox" id="completed" name="completed" {% if task.completed %}checked{% endif %}>
+
+        </div>
+
+        <button type="submit" class="btn btn-success">Update Task</button>
+
+        <button type="reset" class="btn btn-danger">Clear</button>
+
+        <a href="{% url 'index' %}" class="btn btn-secondary">Return</a>
+
+      </form>
+
+    {% elif task_type == 'sideskills' %}
+
+      <h2> Update Sideskills Task </h2>
+
+      <form method="post">
+
+        {% csrf_token %}
+    
+        <div class="form-group mb-3">
+
+          <label for="taskname">Task Name:</label>
+
+          <input type="text" class="form-control" id="taskname" name="taskname" value="{{ task.taskname }}" required>
+
+        </div>
+    
+        <div class="form-group mb-3">
+
+          <label for="skillcategory">Skill Category:</label>
+
+          <input type="text" class="form-control" id="skillcategory" name="skillcategory" value="{{ task.skillcategory }}" required>
+
+        </div>
+    
+        <div class="form-group mb-3">
+
+          <label for="goal">Goal:</label>
+
+          <input type="text" class="form-control" id="goal" name="goal" value="{{ task.goal }}" required>
+
+        </div>
+    
+        <div class="form-group mb-3">
+
+          <label for="resources">Resources:</label>
+
+          <input type="text" class="form-control" id="resources" name="resources" value="{{ task.resources }}" required>
+
+        </div>
+    
+        <div class="form-group mb-3">
+
+          <label for="timeallocation">Time Allocation:</label>
+
+          <input type="text" class="form-control" id="timeallocation" name="timeallocation" value="{{ task.timeallocation }}" required>
+
+        </div>
+    
+        <div class="form-group mb-3">
+
+          <label for="notes">Notes:</label>
+
+          <textarea class="form-control" id="notes" name="notes" rows="3" required>{{ task.notes }}</textarea>
+
+        </div>
+    
+        <div class="form-group mb-3">
+
+          <label for="completed">Completed:</label>
+
+          <input type="checkbox" id="completed" name="completed" {% if task.completed %}checked{% endif %}>
+
+        </div>
+    
+        <button type="submit" class="btn btn-success">Update Task</button>
+
+        <button type="reset" class="btn btn-danger">Clear</button>
+
+        <a href="{% url 'index' %}" class="btn btn-secondary">Return</a>
+    
+      </form>
+
+    {% elif task_type == 'workout' %}
+
+      <h2> Update Workout Task </h2>
+
+      <form method="post">
+
+        {% csrf_token %}
+    
+        <div class="form-group mb-3">
+
+          <label for="taskname">Task Name:</label>
+
+          <input type="text" class="form-control" id="taskname" name="taskname" value="{{ task.taskname }}" required>
+
+        </div>
+
+        <div class="form-group mb-3">
+
+          <label for="type">Workout Type:</label>
+
+          <input type="text" class="form-control" id="type" name="type" value="{{ task.type }}" required>
+
+        </div>
+
+        <div class="form-group mb-3">
+
+          <label for="duration">Duration:</label>
+
+          <input type="text" class="form-control" id="duration" name="duration" value="{{ task.duration }}" required>
+
+        </div>
+
+        <div class="form-group mb-3">
+
+          <label for="location">Location:</label>
+
+          <input type="text" class="form-control" id="location" name="location" value="{{ task.location }}" required>
+
+        </div>
+
+        <div class="form-group mb-3">
+
+          <label for="equipment">Equipment Needed:</label>
+
+          <input type="text" class="form-control" id="equipment" name="equipment" value="{{ task.equipment }}" required>
+
+        </div>
+
+        <div class="form-group mb-3">
+
+          <label for="goal">Goal:</label>
+
+          <input type="text" class="form-control" id="goal" name="goal" value="{{ task.goal }}" required>
+
+        </div>
+
+        <div class="form-group mb-3">
+
+            <label for="notes">Notes:</label>
+  
+            <textarea class="form-control" id="notes" name="notes" rows="3" required>{{ task.notes }}</textarea>
+  
+          </div>
+  
+          <div class="form-group mb-3">
+  
+            <label for="completed">Completed:</label>
+  
+            <input type="checkbox" id="completed" name="completed" {% if task.completed %}checked{% endif %}>
+  
+          </div>
+  
+          <button type="submit" class="btn btn-success">Update Task</button>
+  
+          <button type="reset" class="btn btn-danger">Clear</button>
+  
+          <a href="{% url 'index' %}" class="btn btn-secondary">Return</a>
+  
+        </form>
+  
+      {% else %}
+  
+        {% endif %}
+  
+    </div>
+  
+  </body>
+  
+  {% endblock %}
