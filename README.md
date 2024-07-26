@@ -1,0 +1,2 @@
+# Card-Your-Tasks
+This Django-based web application offers a user-friendly platform to manage various tasks efficiently. Leveraging Bootstrap cards for a visually appealing interface, the app categorizes tasks into four distinct types: office, household, side skills, and workouts. Each task category includes specific fields for detailed tracking. Users can effortlessly create, view, edit, delete, and search through their tasks, ensuring optimal organization and productivity.
